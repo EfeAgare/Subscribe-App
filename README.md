@@ -70,3 +70,19 @@ Total: 65.15
 Sales Taxes: 7.90
 Total: 98.38
 ```
+
+
+#### How to run the app:
+Ensure you have ruby installed then you can clone this repository in your local machine. Then run
+
+```ruby app/entry_point.rb```
+
+You will be receive a prompt to enter an integer corresponding to the input file number for the application
+```
+1 stand for input 1: 
+2 stand for input 2:
+3 stand for input 3:
+```
+
+### Test
+``` rspec ```
