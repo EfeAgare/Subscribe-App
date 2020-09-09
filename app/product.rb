@@ -39,6 +39,8 @@ class Product
       @tax = import_duty_tax + sales_tax
 
       total_tax_array
+
+      total_product_price_array
     end
   end
 
@@ -59,6 +61,21 @@ class Product
   def sum_total_tax_array
     @total_tax_array.reduce(:+)
   end
+
+   # product price
+   def total_price
+    ((@price * quantity) + total_tax).round(2)
+  end
+
+  def total_product_price_array
+    @total_product_price_array << total_price
+  end
+
+  def sum_total_product_price_array
+    @total_product_price_array.reduce(:+)
+  end
+
+
 end
 
 
@@ -67,3 +84,4 @@ item_list = ["2 book at 12.49", "1 music CD at 14.99", "1 cholocate bar at 0.85"
 products = Product.new(item_list)
 puts products.calculate_price
 puts products.sum_total_tax_array
+puts products.sum_total_product_price_array
