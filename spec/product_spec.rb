@@ -1,8 +1,7 @@
 require_relative "../app/product.rb"
 
-item_list = File.readlines(File.dirname(__FILE__) + "/input_files/input_#{1}.txt")
-
 RSpec.describe Product do
+  let(:item_list) { ["2 book at 12.49", "1 music CD at 14.99", "1 cholocate bar at 0.85"] }
   subject(:subject) { described_class.new(item_list) }
 
   context "#calculate_price" do
