@@ -1,7 +1,4 @@
 require_relative "./tax.rb"
-
-
-
 # item_list = ["1 imported box of chocolates at 10.00", "1 imported bottle of perfume at 47.50"]
 
 # item_list = ["1 imported bottle of perfume at 27.99", "1 bottle of perfume at 18.99", "1 packet of headache pills at 9.75", "3 imported boxes of chocolates at 11.25"]
@@ -40,12 +37,27 @@ class Product
       end
 
       @tax = import_duty_tax + sales_tax
+
+      total_tax_array
     end
   end
 
   # get the product quantity
   def quantity
     @product[0].split(" ")[0].to_i
+  end
+
+  # product tax
+  def total_tax
+    product_tax.round_up_tax(@tax) * quantity
+  end
+
+  def total_tax_array
+    @total_tax_array << total_tax
+  end
+
+  def sum_total_tax_array
+    @total_tax_array.reduce(:+)
   end
 end
 
@@ -54,3 +66,4 @@ item_list = ["2 book at 12.49", "1 music CD at 14.99", "1 cholocate bar at 0.85"
 
 products = Product.new(item_list)
 puts products.calculate_price
+puts products.sum_total_tax_array

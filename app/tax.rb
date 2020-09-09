@@ -6,4 +6,8 @@ class Tax
   def sales(price)
     price * 0.1
   end
+
+  def round_up_tax(tax)
+    (tax * 20).ceil / 20.0
+  end
 end
