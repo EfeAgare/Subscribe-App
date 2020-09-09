@@ -85,4 +85,7 @@ You will be receive a prompt to enter an integer corresponding to the input file
 ```
 
 ### Test
-``` rspec ```
+To run all test
+``` 
+rspec
+ ```
