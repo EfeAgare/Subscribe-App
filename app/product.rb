@@ -1,7 +1,4 @@
 require_relative "./tax.rb"
-# item_list = ["1 imported box of chocolates at 10.00", "1 imported bottle of perfume at 47.50"]
-
-# item_list = ["1 imported bottle of perfume at 27.99", "1 bottle of perfume at 18.99", "1 packet of headache pills at 9.75", "3 imported boxes of chocolates at 11.25"]
 
 class Product
   EXEMPTED_PRODUCTS = %w[book food pills cholocate chocolates]
@@ -17,6 +14,13 @@ class Product
 
   def product_tax
     Tax.new()
+  end
+
+  def execute
+    calculate_price
+    show_total_product_tax
+    show_total_product_price
+    show_receipt
   end
 
   def calculate_price
@@ -41,6 +45,8 @@ class Product
       total_tax_array
 
       total_product_price_array
+
+      product_list_array
     end
   end
 
@@ -62,6 +68,10 @@ class Product
     @total_tax_array.reduce(:+)
   end
 
+  def show_total_product_tax
+    @display_items << "Sales Taxes: #{ "%.2f" % sum_total_tax_array.round(2)}"
+  end
+
    # product price
    def total_price
     ((@price * quantity) + total_tax).round(2)
@@ -75,13 +85,26 @@ class Product
     @total_product_price_array.reduce(:+)
   end
 
+  def show_total_product_price
+    @display_items << "Total: #{"%.2f" % sum_total_product_price_array.round(2)}"
+  end
 
+  # show product
+  def product_to_s
+    @product[0].strip() + ": " + "%.2f" % total_price.to_s
+  end
+
+  def product_list_array
+    @display_items << product_to_s
+  end
+
+  def show_receipt
+    puts "*************************************"
+    puts "           Mini-Mart Receipt         "
+    puts "*************************************"
+    puts @display_items
+
+    puts "*************************************"
+  end
 end
 
-
-item_list = ["2 book at 12.49", "1 music CD at 14.99", "1 cholocate bar at 0.85"]
-
-products = Product.new(item_list)
-puts products.calculate_price
-puts products.sum_total_tax_array
-puts products.sum_total_product_price_array
